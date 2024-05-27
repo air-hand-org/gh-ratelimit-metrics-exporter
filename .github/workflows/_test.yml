@@ -1,0 +1,29 @@
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+        with:
+          persist-credentials: false
+      - uses: aquaproj/aqua-installer@4551ec64e21bf0f557c2525135ff0bd2cba40ec7 # v3.0.0
+        with:
+          aqua_version: v2.25.1
+          aqua_opts: ""
+      - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3.6.3
+      - name: build
+        run: make build
+      - name: lint
+        run: make lint
+      - name: test
+        run: make test
+      - name: e2e-test
+        run: make e2e-test
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

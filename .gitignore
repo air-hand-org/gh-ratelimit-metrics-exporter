@@ -1,5 +1,4 @@
 gen_*.go
+dist/
 # debug bin
 __*
-
-*.env

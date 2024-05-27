@@ -1,8 +1,18 @@
-skip-files:
-  - gen_*.go
+version: "2"
 
 linters:
   enable:
-    - gofmt
     - govet
     - revive
+  exclusions:
+    paths:
+      - gen_*\.go
+      - _test\.go
+
+formatters:
+  enable:
+    - gofmt
+  exclusions:
+    paths:
+      - gen_*\.go
+      - _test\.go
