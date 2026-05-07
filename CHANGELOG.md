@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.4.2...v1.5.0) (2026-05-07)
+
+
+### Features
+
+* add healthcheck endpoint ([#39](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/39)) ([9c46b70](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/9c46b70415009ae5e257a91c2ee2f8e858a4bc89))
+
 ## [1.4.2](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.4.1...v1.4.2) (2026-05-07)
 
 
