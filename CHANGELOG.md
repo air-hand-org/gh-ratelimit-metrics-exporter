@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.5.0...v1.6.0) (2026-05-07)
+
+
+### Features
+
+* add missing rate limit metrics ([#42](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/42)) ([2da56dd](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/2da56ddfe96b489f6cc9c3ae578ab36e16af1a6a))
+
 ## [1.5.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.4.2...v1.5.0) (2026-05-07)
 
 
