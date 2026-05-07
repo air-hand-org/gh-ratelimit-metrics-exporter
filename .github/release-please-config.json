@@ -4,7 +4,8 @@
       "release-type": "go",
       "package-name": "gh-ratelimit-metrics-exporter",
       "draft": true,
-      "include-component-in-tag": false
+      "include-component-in-tag": false,
+      "force-tag-creation": true
     }
   }
 }
