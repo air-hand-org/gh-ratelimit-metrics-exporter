@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/google/go-github/v61/github"
+	"github.com/google/go-github/v85/github"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/rs/zerolog"
 )

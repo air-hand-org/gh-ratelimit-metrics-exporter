@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/google/go-github/v61/github"
+	"github.com/google/go-github/v85/github"
 	"github.com/stretchr/testify/assert"
 )
 
