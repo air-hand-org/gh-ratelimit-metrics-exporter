@@ -2,7 +2,8 @@
   "packages": {
     ".": {
       "release-type": "go",
-      "package-name": "gh-ratelimit-metrics-exporter"
+      "package-name": "gh-ratelimit-metrics-exporter",
+      "draft": true
     }
   }
 }
