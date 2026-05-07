@@ -96,7 +96,7 @@ jobs:
       - uses: aquaproj/aqua-installer@5e54e5cee8a95ee2ce7c04cb993da6dfad13e59c # v3.1.2
         if: ${{ steps.changed.outputs.release == 'true' }}
         with:
-          aqua_version: v2.25.1
+          aqua_version: v2.57.2
           aqua_opts: ""
 
       - uses: goreleaser/goreleaser-action@1a80836c5c9d9e5755a25cb59ec6f45a3b5f41a8 # v7.2.1
