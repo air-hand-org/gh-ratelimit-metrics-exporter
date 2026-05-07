@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.4.1...v1.4.2) (2026-05-07)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/google/go-github/v61 to v85 ([#25](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/25)) ([7ddc59c](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/7ddc59c90075a2952d8fa2d7560012d85902070f))
+
 ## [1.4.1](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.4.0...v1.4.1) (2026-05-07)
 
 
