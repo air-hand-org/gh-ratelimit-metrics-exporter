@@ -28,7 +28,11 @@
       matchUpdateTypes: ['patch'],
       addLabels: ['patch'],
       automerge: true,
-    }
+    },
+    {
+      "matchManagers": ["gomod"],
+      "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
+    },
   ],
   mise: {
     managerFilePatterns: [
