@@ -52,4 +52,4 @@ changelog:
 
 release:
   use_existing_draft: true
-  mode: replace
+  mode: keep-existing
