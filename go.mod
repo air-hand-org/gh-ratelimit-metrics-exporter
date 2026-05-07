@@ -8,7 +8,7 @@ require (
 	github.com/prometheus/client_golang v1.23.2
 	github.com/rs/zerolog v1.32.0
 	github.com/stretchr/testify v1.11.1
-	go.uber.org/dig v1.17.1
+	go.uber.org/dig v1.19.0
 )
 
 require (
