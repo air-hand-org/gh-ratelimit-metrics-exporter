@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.4.0...v1.4.1) (2026-05-07)
+
+
+### Bug Fixes
+
+* goreleaser ([#35](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/35)) ([db399d1](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/db399d1ebd8bee47c39a62417dfc1469c6fc1736))
+
 ## [1.4.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.3.0...v1.4.0) (2026-05-07)
 
 
