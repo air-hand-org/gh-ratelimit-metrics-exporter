@@ -48,13 +48,23 @@ var (
 		Name: "github_rate_limit_scim_remaining",
 		Help: "The remaining number of requests to GitHub API",
 	})
+	rateLimitAuditLogRemaining = prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "github_rate_limit_audit_log_remaining",
+		Help: "The remaining number of requests to GitHub API",
+	})
+	rateLimitDependencySBOMRemaining = prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "github_rate_limit_dependency_sbom_remaining",
+		Help: "The remaining number of requests to GitHub API",
+	})
 )
 
 func initPrometheus() {
 	prometheus.MustRegister(
+		rateLimitAuditLogRemaining,
 		rateLimitCoreRemaining,
 		rateLimitCodeSearchRemaining,
 		rateLimitDependencySnapshotsRemaining,
+		rateLimitDependencySBOMRemaining,
 		rateLimitActionsRunnerRegistrationRemaining,
 		rateLimitCodeScanningUploadRemaining,
 		rateLimitGraphQLRemaining,
@@ -77,14 +87,23 @@ func fetchGitHubRateLimit(rlf RateLimitsFetcher, logger *zerolog.Logger) {
 		logger.Error().Err(err).Msg("Fail to fetch rate limits.")
 		return
 	}
-	rateLimitCoreRemaining.Set(float64(rateLimits.Core.Remaining))
-	rateLimitSearchRemaining.Set(float64(rateLimits.Search.Remaining))
-	rateLimitCodeSearchRemaining.Set(float64(rateLimits.CodeSearch.Remaining))
-	rateLimitGraphQLRemaining.Set(float64(rateLimits.GraphQL.Remaining))
-	rateLimitIntegrationManifestRemaining.Set(float64(rateLimits.IntegrationManifest.Remaining))
-	rateLimitDependencySnapshotsRemaining.Set(float64(rateLimits.DependencySnapshots.Remaining))
-	rateLimitCodeScanningUploadRemaining.Set(float64(rateLimits.CodeScanningUpload.Remaining))
-	rateLimitActionsRunnerRegistrationRemaining.Set(float64(rateLimits.ActionsRunnerRegistration.Remaining))
-	rateLimitSourceImportRemaining.Set(float64(rateLimits.SourceImport.Remaining))
-	rateLimitSCIMRemaining.Set(float64(rateLimits.SCIM.Remaining))
+	setRateLimitRemaining(rateLimitCoreRemaining, rateLimits.Core)
+	setRateLimitRemaining(rateLimitSearchRemaining, rateLimits.Search)
+	setRateLimitRemaining(rateLimitCodeSearchRemaining, rateLimits.CodeSearch)
+	setRateLimitRemaining(rateLimitGraphQLRemaining, rateLimits.GraphQL)
+	setRateLimitRemaining(rateLimitIntegrationManifestRemaining, rateLimits.IntegrationManifest)
+	setRateLimitRemaining(rateLimitDependencySnapshotsRemaining, rateLimits.DependencySnapshots)
+	setRateLimitRemaining(rateLimitCodeScanningUploadRemaining, rateLimits.CodeScanningUpload)
+	setRateLimitRemaining(rateLimitActionsRunnerRegistrationRemaining, rateLimits.ActionsRunnerRegistration)
+	setRateLimitRemaining(rateLimitSourceImportRemaining, rateLimits.SourceImport)
+	setRateLimitRemaining(rateLimitSCIMRemaining, rateLimits.SCIM)
+	setRateLimitRemaining(rateLimitAuditLogRemaining, rateLimits.AuditLog)
+	setRateLimitRemaining(rateLimitDependencySBOMRemaining, rateLimits.DependencySBOM)
+}
+
+func setRateLimitRemaining(gauge prometheus.Gauge, rate *github.Rate) {
+	if rate == nil {
+		return
+	}
+	gauge.Set(float64(rate.Remaining))
 }
