@@ -8,7 +8,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/rs/zerolog"
 	"go.uber.org/dig"
 )
@@ -43,13 +42,10 @@ func main() {
 		ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 		defer cancel()
 
-		mux := http.NewServeMux()
-		// TODO: impl health check endpoint.
-		mux.Handle("/metrics", promhttp.Handler())
 		// TODO: enable to change port.
 		server := &http.Server{
 			Addr:    ":8080",
-			Handler: mux,
+			Handler: newHTTPHandler(),
 		}
 		go func() {
 			if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
