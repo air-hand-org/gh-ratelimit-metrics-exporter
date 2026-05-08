@@ -33,5 +33,6 @@ e2e-test:
 		ghcr.io/$${GITHUB_REPOSITORY_OWNER}/$(PROJECT_NAME):latest-amd64 && \
 	wait-for localhost:$(PORT) -t 30  && \
 	curl -fsS -X GET http://localhost:$(PORT)/healthz && \
-	curl -fsS -X GET http://localhost:$(PORT)/metrics | promtool check metrics --extended
+	curl -fsS -X GET http://localhost:$(PORT)/metrics | promtool check metrics --extended && \
+	curl -fsS -X GET http://localhost:$(PORT)/metrics
 	docker stop $(PROJECT_NAME) || true
