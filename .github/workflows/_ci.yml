@@ -2,11 +2,11 @@ on:
   workflow_call:
     inputs:
       gh-app-client-id:
-        required: false
+        required: true
         type: string
     secrets:
       gh-app-private-key:
-        required: false
+        required: true
 
 permissions: {}
 
