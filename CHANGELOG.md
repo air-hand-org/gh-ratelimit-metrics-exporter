@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v2.0.0...v3.0.0) (2026-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* error when not authentication ([#51](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/51))
+
+### Bug Fixes
+
+* error when not authentication ([#51](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/51)) ([146fc0f](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/146fc0f33d7d9d26c31c101f6c1fa4c0fee3614f))
+
 ## [2.0.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.6.0...v2.0.0) (2026-05-08)
 
 
