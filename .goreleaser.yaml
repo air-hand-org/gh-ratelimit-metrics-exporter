@@ -9,7 +9,7 @@ before:
 
 builds:
   - id: gh-ratelimit-metrics-exporter
-    dir: app
+    dir: cmd/server
     main: .
     binary: gh-ratelimit-metrics-exporter
     env:

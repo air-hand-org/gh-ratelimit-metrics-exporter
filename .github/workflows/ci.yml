@@ -22,7 +22,9 @@ jobs:
     secrets:
       gh-app-private-key: ${{ secrets.GH_APP_RELEASE_PRIVATE_KEY }}
     permissions:
+      actions: read
       contents: read
+      security-events: write
       statuses: write
       issues: write
       pull-requests: write

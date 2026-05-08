@@ -10,13 +10,17 @@ export GITHUB_REPOSITORY_OWNER
 build:
 	goreleaser release --snapshot --clean
 
+.PHONY: codeql-build
+codeql-build:
+	go build -o /tmp/gh-ratelimit-metrics-exporter-codeql ./cmd/server
+
 .PHONY: fmt
 fmt:
 	go fmt ./...
 
 .PHONY: run
 run:
-	go run ./app
+	go run ./cmd/server
 
 .PHONY: lint
 lint:
