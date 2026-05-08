@@ -1,13 +1,15 @@
 package main
 
 import (
+	"context"
 	"net/http"
 	"os"
 	"strconv"
 
-	"github.com/bradleyfalzon/ghinstallation/v2"
 	"github.com/google/go-github/v85/github"
+	"github.com/jferrl/go-githubauth"
 	"github.com/rs/zerolog"
+	"golang.org/x/oauth2"
 )
 
 // newClientWithGitHubApp creates a new GitHub client with GitHub App.
@@ -31,11 +33,32 @@ func newClientWithGitHubApp(logger *zerolog.Logger) *github.Client {
 		logger.Error().Msg("Failed to parse GH_INSTALLATION_ID as integer.")
 		return nil
 	}
-	tr, err := ghinstallation.New(http.DefaultTransport, ghAppIDInt64, ghInstallationIDInt64, []byte(ghPrivateKey))
+	client, err := newGitHubAppHTTPClient(ghAppIDInt64, ghInstallationIDInt64, []byte(ghPrivateKey))
 	if err != nil {
-		logger.Error().Msg("Failed to new transport with GitHub App.")
+		logger.Error().Msg("Failed to new HTTP client with GitHub App.")
 		return nil
 	}
 	logger.Info().Msg("Generate a new GitHub client with GitHub App.")
-	return github.NewClient(&http.Client{Transport: tr})
+	return github.NewClient(client)
+}
+
+func newGitHubAppHTTPClient(appID, installationID int64, privateKey []byte) (*http.Client, error) {
+	appTokenSource, err := githubauth.NewApplicationTokenSource(appID, privateKey)
+	if err != nil {
+		return nil, err
+	}
+
+	installationTokenSource := githubauth.NewInstallationTokenSource(
+		installationID,
+		appTokenSource,
+		githubauth.WithInstallationTokenOptions(emptyInstallationTokenOptions()),
+	)
+
+	return oauth2.NewClient(context.Background(), installationTokenSource), nil
+}
+
+func emptyInstallationTokenOptions() *githubauth.InstallationTokenOptions {
+	return &githubauth.InstallationTokenOptions{
+		Permissions: &githubauth.InstallationPermissions{},
+	}
 }
