@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewClientWithEnv_NotNil(t *testing.T) {
+func TestNewClientWithEnv_Nil(t *testing.T) {
 	tests := []struct {
 		testName string
 		funcs    []newClientFunc
@@ -42,7 +42,9 @@ func TestNewClientWithEnv_NotNil(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.testName, func(t *testing.T) {
-			assert.NotNilf(t, newClientWithEnv(tt.funcs, logger), "test_name: %s", tt.testName)
+			c, err := newClientWithEnv(tt.funcs, logger)
+			assert.Nilf(t, c, "test_name: %s", tt.testName)
+			assert.Error(t, err)
 		})
 	}
 }

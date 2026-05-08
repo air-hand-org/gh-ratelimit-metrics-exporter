@@ -1,0 +1,19 @@
+services:
+  exporter:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER:-air-hand-org}/gh-ratelimit-metrics-exporter:latest-amd64
+    environment:
+      GH_TOKEN: ${GH_TOKEN:-}
+      GH_APP_CLIENT_ID: ${GH_APP_CLIENT_ID:-}
+      GH_INSTALLATION_ID: ${GH_INSTALLATION_ID:-}
+      GH_PRIVATE_KEY: ${GH_PRIVATE_KEY:-}
+    ports:
+      - "${PORT:-8080}:8080"
+
+  prometheus:
+    image: prom/prometheus:latest
+    depends_on:
+      - exporter
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"

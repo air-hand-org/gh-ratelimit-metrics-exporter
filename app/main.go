@@ -85,6 +85,6 @@ func main() {
 	})
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to start server\n", err)
 	}
 }

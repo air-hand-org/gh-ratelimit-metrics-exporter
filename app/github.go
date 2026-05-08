@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/google/go-github/v85/github"
@@ -15,15 +16,13 @@ var newClientFuncs = []newClientFunc{
 	newClientWithToken,
 }
 
-func newClientWithEnv(funcs []newClientFunc, logger *zerolog.Logger) *github.Client {
+func newClientWithEnv(funcs []newClientFunc, logger *zerolog.Logger) (*github.Client, error) {
 	for _, f := range funcs {
 		if gh := f(logger); gh != nil {
-			return gh
+			return gh, nil
 		}
 	}
-	// fallback
-	logger.Info().Msg("fallback to No Auth client.")
-	return github.NewClient(nil)
+	return nil, errors.New("no GitHub authentication is configured")
 }
 
 type GitHubRateLimitsFetcher struct {
