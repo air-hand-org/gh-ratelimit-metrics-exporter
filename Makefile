@@ -8,6 +8,10 @@ export GITHUB_REPOSITORY_OWNER
 build:
 	goreleaser release --snapshot --clean
 
+.PHONY: fmt
+fmt:
+	go fmt ./...
+
 .PHONY: run
 run:
 	go run ./app
