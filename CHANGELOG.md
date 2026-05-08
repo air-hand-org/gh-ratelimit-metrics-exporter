@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.6.0...v2.0.0) (2026-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* GH_APP_ID is replaced by GH_APP_CLIENT_ID for GitHub App authentication.
+
+### Features
+
+* use GitHub App client ID for authentication ([#48](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/48)) ([351436e](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/351436e9fc21aa9d583ab762b271c95d85e13170))
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/jferrl/go-githubauth to v1.6.0 ([#46](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/46)) ([b962bec](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/b962bec68956edecab52a1dcff3c4e5e7a887279))
+* request GitHub App tokens with empty permissions ([#44](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/44)) ([069b446](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/069b446d3f7e0eaebd198a91fdbb2a8947088563))
+
 ## [1.6.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v1.5.0...v1.6.0) (2026-05-07)
 
 
