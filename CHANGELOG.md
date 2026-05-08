@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.0...v3.0.1) (2026-05-08)
+
+
+### Bug Fixes
+
+* **ci:** add CodeQL analysis ([#55](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/55)) ([8d46ad1](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/8d46ad1ed30655effc99ace9dfcdf68863584705))
+
 ## [3.0.0](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v2.0.0...v3.0.0) (2026-05-08)
 
 
