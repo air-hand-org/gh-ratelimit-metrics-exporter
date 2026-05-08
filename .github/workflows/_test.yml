@@ -1,5 +1,12 @@
 on:
   workflow_call:
+    inputs:
+      gh-app-client-id:
+        required: false
+        type: string
+    secrets:
+      gh-app-private-key:
+        required: false
 
 permissions: {}
 
@@ -27,3 +34,28 @@ jobs:
         run: make e2e-test
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: check GitHub App e2e configuration
+        id: github-app-e2e
+        run: |
+          if [[ -z "${GH_APP_CLIENT_ID}" || -z "${GH_PRIVATE_KEY}" ]]; then
+            echo "Skip GitHub App e2e-test because GitHub App secrets are not configured."
+            echo "configured=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "configured=true" >> "${GITHUB_OUTPUT}"
+          fi
+        env:
+          GH_APP_CLIENT_ID: ${{ inputs.gh-app-client-id }}
+          GH_PRIVATE_KEY: ${{ secrets.gh-app-private-key }}
+      - uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        id: app-token
+        if: ${{ steps.github-app-e2e.outputs.configured == 'true' }}
+        with:
+          client-id: ${{ inputs.gh-app-client-id }}
+          private-key: ${{ secrets.gh-app-private-key }}
+      - name: e2e-test-github-app
+        if: ${{ steps.github-app-e2e.outputs.configured == 'true' }}
+        run: make e2e-test
+        env:
+          GH_APP_CLIENT_ID: ${{ inputs.gh-app-client-id }}
+          GH_INSTALLATION_ID: ${{ steps.app-token.outputs.installation-id }}
+          GH_PRIVATE_KEY: ${{ secrets.gh-app-private-key }}
