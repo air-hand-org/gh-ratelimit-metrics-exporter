@@ -4,12 +4,12 @@ go 1.26.2
 
 require (
 	github.com/google/go-github/v85 v85.0.0
-	github.com/jferrl/go-githubauth v1.5.1
+	github.com/jferrl/go-githubauth v1.6.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/rs/zerolog v1.35.1
 	github.com/stretchr/testify v1.11.1
 	go.uber.org/dig v1.19.0
-	golang.org/x/oauth2 v0.34.0
+	golang.org/x/oauth2 v0.36.0
 )
 
 require (
