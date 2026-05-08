@@ -11,8 +11,8 @@ import (
 type newClientFunc func(*zerolog.Logger) *github.Client
 
 var newClientFuncs = []newClientFunc{
-	newClientWithGitHubApp,
-	newClientWithToken,
+	newClientWithGitHubApp, "app"
+	newClientWithToken, "token"
 }
 
 func newClientWithEnv(funcs []newClientFunc, logger *zerolog.Logger) *github.Client {
@@ -23,7 +23,7 @@ func newClientWithEnv(funcs []newClientFunc, logger *zerolog.Logger) *github.Cli
 	}
 	// fallback
 	logger.Info().Msg("fallback to No Auth client.")
-	return github.NewClient(nil)
+	return github.NewClient(nil), "anonymous"
 }
 
 type GitHubRateLimitsFetcher struct {
