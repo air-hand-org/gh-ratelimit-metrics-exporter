@@ -4,10 +4,12 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
+	"encoding/json"
 	"encoding/pem"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestNewClientWithGitHubApp(t *testing.T) {
@@ -102,4 +104,22 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestNewGitHubAppHTTPClientUsesEmptyPermissions(t *testing.T) {
+	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
+	require.NoError(t, err)
+
+	pemData := pem.EncodeToMemory(&pem.Block{
+		Type:  "RSA PRIVATE KEY",
+		Bytes: x509.MarshalPKCS1PrivateKey(privateKey),
+	})
+
+	client, err := newGitHubAppHTTPClient(100, 1008, pemData)
+	require.NoError(t, err)
+	require.NotNil(t, client)
+
+	body, err := json.Marshal(emptyInstallationTokenOptions())
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"permissions":{}}`, string(body))
 }
