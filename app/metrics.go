@@ -8,6 +8,10 @@ import (
 
 // https://docs.github.com/en/rest/rate-limit/rate-limit?apiVersion=2022-11-28#about-rate-limits
 var (
+ githubRateLimitAuthInfo = promauto.NewGaugeVec(prometheus.GaugeOpts{
+	Name: "github_rate_limit_auth_info",
+	Help: "GitHub authentication information for this exporter.",
+}, []string{"type"})
 	rateLimitCoreRemaining = prometheus.NewGauge(prometheus.GaugeOpts{
 		Name: "github_rate_limit_core_remaining",
 		Help: "The remaining number of requests to GitHub API",
