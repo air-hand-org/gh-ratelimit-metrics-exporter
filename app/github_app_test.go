@@ -26,63 +26,56 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 
 	tests := []struct {
 		testName       string
-		appID          string
+		appClientID    string
 		installationID string
 		privateKey     string
 		expectNil      bool
 	}{
 		{
 			testName:       "No env at all",
-			appID:          "",
+			appClientID:    "",
 			installationID: "",
 			privateKey:     "",
 			expectNil:      true,
 		},
 		{
-			testName:       "Lack of app_id",
-			appID:          "",
-			installationID: "1008",
-			privateKey:     pemDataString,
-			expectNil:      true,
-		},
-		{
-			testName:       "Not integer app_id",
-			appID:          "abc",
+			testName:       "Lack of client_id",
+			appClientID:    "",
 			installationID: "1008",
 			privateKey:     pemDataString,
 			expectNil:      true,
 		},
 		{
 			testName:       "Lack of installation_id",
-			appID:          "100",
+			appClientID:    "Iv1.0123456789abcdef",
 			installationID: "",
 			privateKey:     pemDataString,
 			expectNil:      true,
 		},
 		{
 			testName:       "Not integer installation_id",
-			appID:          "100",
+			appClientID:    "Iv1.0123456789abcdef",
 			installationID: "def",
 			privateKey:     pemDataString,
 			expectNil:      true,
 		},
 		{
 			testName:       "Lack of private_key",
-			appID:          "100",
+			appClientID:    "Iv1.0123456789abcdef",
 			installationID: "1008",
 			privateKey:     "",
 			expectNil:      true,
 		},
 		{
 			testName:       "Broken private key",
-			appID:          "100",
+			appClientID:    "Iv1.0123456789abcdef",
 			installationID: "1008",
 			privateKey:     "foobarbaz",
 			expectNil:      true,
 		},
 		{
 			testName:       "Ok",
-			appID:          "100",
+			appClientID:    "Iv1.0123456789abcdef",
 			installationID: "1008",
 			privateKey:     pemDataString,
 			expectNil:      false,
@@ -93,7 +86,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.testName, func(t *testing.T) {
-			t.Setenv("GH_APP_ID", tt.appID)
+			t.Setenv("GH_APP_CLIENT_ID", tt.appClientID)
 			t.Setenv("GH_INSTALLATION_ID", tt.installationID)
 			t.Setenv("GH_PRIVATE_KEY", tt.privateKey)
 
@@ -115,7 +108,7 @@ func TestNewGitHubAppHTTPClientUsesEmptyPermissions(t *testing.T) {
 		Bytes: x509.MarshalPKCS1PrivateKey(privateKey),
 	})
 
-	client, err := newGitHubAppHTTPClient(100, 1008, pemData)
+	client, err := newGitHubAppHTTPClient("Iv1.0123456789abcdef", 1008, pemData)
 	require.NoError(t, err)
 	require.NotNil(t, client)
 

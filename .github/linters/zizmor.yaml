@@ -3,3 +3,5 @@ rules:
     ignore:
       - release.yml
       - .github/workflows/release.yml
+      - _test.yml
+      - .github/workflows/_test.yml

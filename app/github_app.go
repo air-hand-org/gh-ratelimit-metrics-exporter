@@ -14,26 +14,22 @@ import (
 
 // newClientWithGitHubApp creates a new GitHub client with GitHub App.
 func newClientWithGitHubApp(logger *zerolog.Logger) *github.Client {
-	ghAppID := os.Getenv("GH_APP_ID")
+	ghAppClientID := os.Getenv("GH_APP_CLIENT_ID")
 	ghInstallationID := os.Getenv("GH_INSTALLATION_ID")
 	ghPrivateKey := os.Getenv("GH_PRIVATE_KEY")
 
-	if ghAppID == "" || ghInstallationID == "" || ghPrivateKey == "" {
-		logger.Debug().Msg("Neighter GH_APP_ID nor GH_INSTALLATION_ID nor GH_PRIVATE_KEY is set. Skip generating a new GitHub client with GitHub App.")
+	if ghAppClientID == "" || ghInstallationID == "" || ghPrivateKey == "" {
+		logger.Debug().Msg("Neither GH_APP_CLIENT_ID nor GH_INSTALLATION_ID nor GH_PRIVATE_KEY is set. Skip generating a new GitHub client with GitHub App.")
 		return nil
 	}
 
-	ghAppIDInt64, err := strconv.ParseInt(ghAppID, 10, 64)
-	if err != nil {
-		logger.Error().Msg("Failed to parse GH_APP_ID as integer.")
-		return nil
-	}
 	ghInstallationIDInt64, err := strconv.ParseInt(ghInstallationID, 10, 64)
 	if err != nil {
 		logger.Error().Msg("Failed to parse GH_INSTALLATION_ID as integer.")
 		return nil
 	}
-	client, err := newGitHubAppHTTPClient(ghAppIDInt64, ghInstallationIDInt64, []byte(ghPrivateKey))
+
+	client, err := newGitHubAppHTTPClient(ghAppClientID, ghInstallationIDInt64, []byte(ghPrivateKey))
 	if err != nil {
 		logger.Error().Msg("Failed to new HTTP client with GitHub App.")
 		return nil
@@ -42,8 +38,8 @@ func newClientWithGitHubApp(logger *zerolog.Logger) *github.Client {
 	return github.NewClient(client)
 }
 
-func newGitHubAppHTTPClient(appID, installationID int64, privateKey []byte) (*http.Client, error) {
-	appTokenSource, err := githubauth.NewApplicationTokenSource(appID, privateKey)
+func newGitHubAppHTTPClient(appClientID string, installationID int64, privateKey []byte) (*http.Client, error) {
+	appTokenSource, err := githubauth.NewApplicationTokenSource(appClientID, privateKey)
 	if err != nil {
 		return nil, err
 	}
