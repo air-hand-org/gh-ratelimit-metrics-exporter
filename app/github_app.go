@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/google/go-github/v85/github"
-	"github.com/jferrl/go-githubauth"
+	"github.com/jferrl/go-githubauth/v2"
 	"github.com/rs/zerolog"
 	"golang.org/x/oauth2"
 )
