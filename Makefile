@@ -12,7 +12,7 @@ build:
 
 .PHONY: codeql-build
 codeql-build:
-	go build -o /tmp/gh-ratelimit-metrics-exporter-codeql ./cmd/server
+	go mod tidy && go generate ./... && go build -v -o /tmp/gh-ratelimit-metrics-exporter-codeql ./cmd/server
 
 .PHONY: fmt
 fmt:
