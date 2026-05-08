@@ -5,3 +5,6 @@ rules:
       - .github/workflows/release.yml
       - _test.yml
       - .github/workflows/_test.yml
+      - _ci.yml
+      - .github/workflows/_ci.yml
+
