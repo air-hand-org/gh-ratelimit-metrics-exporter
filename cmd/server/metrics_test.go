@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"testing"
 
@@ -11,21 +12,22 @@ import (
 
 func TestFetchGitHubRateLimit_FailToFetch(t *testing.T) {
 	rlf := &RateLimitsFetcherMock{
-		FetchFunc: func() (*github.RateLimits, error) {
+		FetchFunc: func(_ context.Context) (*github.RateLimits, error) {
 			return nil, fmt.Errorf("some errors")
 		},
 	}
 
 	logger := NewNullLogger()
+	ctx := context.Background()
 
 	assert.NotPanics(t, func() {
-		fetchGitHubRateLimit(rlf, logger)
+		fetchGitHubRateLimit(ctx, rlf, logger)
 	})
 }
 
 func TestFetchGitHubRateLimit_SetRemainingMetrics(t *testing.T) {
 	rlf := &RateLimitsFetcherMock{
-		FetchFunc: func() (*github.RateLimits, error) {
+		FetchFunc: func(_ context.Context) (*github.RateLimits, error) {
 			return &github.RateLimits{
 				Core:                      &github.Rate{Remaining: 1},
 				Search:                    &github.Rate{Remaining: 2},
@@ -44,8 +46,9 @@ func TestFetchGitHubRateLimit_SetRemainingMetrics(t *testing.T) {
 	}
 
 	logger := NewNullLogger()
+	ctx := context.Background()
 
-	fetchGitHubRateLimit(rlf, logger)
+	fetchGitHubRateLimit(ctx, rlf, logger)
 
 	assert.Equal(t, float64(1), testutil.ToFloat64(rateLimitCoreRemaining))
 	assert.Equal(t, float64(2), testutil.ToFloat64(rateLimitSearchRemaining))
@@ -63,14 +66,15 @@ func TestFetchGitHubRateLimit_SetRemainingMetrics(t *testing.T) {
 
 func TestFetchGitHubRateLimit_SkipNilRateLimit(t *testing.T) {
 	rlf := &RateLimitsFetcherMock{
-		FetchFunc: func() (*github.RateLimits, error) {
+		FetchFunc: func(_ context.Context) (*github.RateLimits, error) {
 			return &github.RateLimits{}, nil
 		},
 	}
 
 	logger := NewNullLogger()
+	ctx := context.Background()
 
 	assert.NotPanics(t, func() {
-		fetchGitHubRateLimit(rlf, logger)
+		fetchGitHubRateLimit(ctx, rlf, logger)
 	})
 }
