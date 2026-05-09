@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.3](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.2...v3.0.3) (2026-05-09)
+
+
+### Bug Fixes
+
+* **deps:** update module golang.org/x/sync to v0.20.0 ([#60](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/60)) ([4cd0e29](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/4cd0e29c3b5f8d04af1be404e85ae2243132cade))
+
 ## [3.0.2](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.1...v3.0.2) (2026-05-09)
 
 
