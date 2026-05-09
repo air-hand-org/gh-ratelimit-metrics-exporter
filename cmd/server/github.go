@@ -33,8 +33,8 @@ type GitHubRateLimitsFetcher struct {
 // explicit compile error check
 var _ RateLimitsFetcher = (*GitHubRateLimitsFetcher)(nil)
 
-func (g *GitHubRateLimitsFetcher) Fetch() (*github.RateLimits, error) {
-	rateLimits, res, err := g.client.RateLimit.Get(context.Background())
+func (g *GitHubRateLimitsFetcher) Fetch(ctx context.Context) (*github.RateLimits, error) {
+	rateLimits, res, err := g.client.RateLimit.Get(ctx)
 	if err != nil {
 		g.logger.Error().Err(err).Msgf("Err: %v", res)
 		return nil, fmt.Errorf("%w", err)

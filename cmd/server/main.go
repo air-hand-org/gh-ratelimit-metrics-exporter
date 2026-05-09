@@ -8,11 +8,15 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/cockroachdb/errors"
 	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/pkgerrors"
 	"go.uber.org/dig"
+	"golang.org/x/sync/errgroup"
 )
 
 func init() {
+	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
 	initPrometheus()
 }
 
@@ -38,50 +42,68 @@ func registerConstructors() *dig.Container {
 func main() {
 	c := registerConstructors()
 
-	err := c.Invoke(func(rtf RateLimitsFetcher, logger *zerolog.Logger) {
-		ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	err := c.Invoke(func(rtf RateLimitsFetcher, logger *zerolog.Logger) error {
+		signalCtx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 		defer cancel()
+
+		g, ctx := errgroup.WithContext(signalCtx)
+
+		fetch := func() {
+			fetchCtx, cancelFetch := context.WithTimeout(ctx, 15*time.Second)
+			defer cancelFetch()
+			fetchGitHubRateLimit(fetchCtx, rtf, logger)
+		}
 
 		// TODO: enable to change port.
 		server := &http.Server{
 			Addr:    ":8080",
 			Handler: newHTTPHandler(),
 		}
-		go func() {
+
+		g.Go(func() error {
 			if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-				logger.Error().Err(err).Msg("Failed to start HTTP server.")
+				return errors.Wrap(err, "failed to start HTTP server")
 			}
-		}()
+			return nil
+		})
 
-		// fetch GitHub rate limit at the beginning
-		fetchGitHubRateLimit(rtf, logger)
+		g.Go(func() error {
+			<-ctx.Done()
+			logger.Info().Msg("Shutting down server.")
 
-		go func() {
+			ctxS, cancelS := context.WithTimeout(context.Background(), 10*time.Second)
+			defer cancelS()
+
+			if err := server.Shutdown(ctxS); err != nil {
+				return errors.Wrap(err, "failed to shutdown HTTP server")
+			}
+			logger.Info().Msg("Server shutdown")
+			return nil
+		})
+
+		g.Go(func() error {
+			// fetch GitHub rate limit at the beginning
+			fetch()
 			// TODO: enable to change interval
 			ticker := time.NewTicker(5 * time.Minute)
 			defer ticker.Stop()
+
 			for {
 				select {
 				case <-ctx.Done():
 					logger.Info().Msg("Stop fetching GitHub rate limit.")
-					return
+					return nil
 				case <-ticker.C:
-					fetchGitHubRateLimit(rtf, logger)
+					fetch()
 				}
 			}
-		}()
+		})
 
-		<-ctx.Done()
-		logger.Info().Msg("Received a signal to stop.")
-
-		ctxS, cancelS := context.WithTimeout(context.Background(), 10*time.Second)
-		defer cancelS()
-
-		if err := server.Shutdown(ctxS); err != nil {
-			logger.Fatal().Err(err).Msg("Failed to shutdown HTTP server.")
-			return
+		if err := g.Wait(); err != nil {
+			logger.Error().Stack().Err(err).Msg("Server stopped with error.")
+			return err
 		}
-		logger.Info().Msg("Server shutdown")
+		return nil
 	})
 
 	if err != nil {

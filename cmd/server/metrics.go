@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+
 	"github.com/google/go-github/v85/github"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/rs/zerolog"
@@ -78,11 +80,11 @@ func initPrometheus() {
 //go:generate moq -out gen_metrics_moq_test.go . RateLimitsFetcher
 
 type RateLimitsFetcher interface {
-	Fetch() (*github.RateLimits, error)
+	Fetch(ctx context.Context) (*github.RateLimits, error)
 }
 
-func fetchGitHubRateLimit(rlf RateLimitsFetcher, logger *zerolog.Logger) {
-	rateLimits, err := rlf.Fetch()
+func fetchGitHubRateLimit(ctx context.Context, rlf RateLimitsFetcher, logger *zerolog.Logger) {
+	rateLimits, err := rlf.Fetch(ctx)
 	if err != nil {
 		logger.Error().Err(err).Msg("Fail to fetch rate limits.")
 		return
