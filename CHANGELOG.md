@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.1...v3.0.2) (2026-05-09)
+
+
+### Bug Fixes
+
+* stop server goroutines with context ([#58](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/58)) ([ea107e9](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/ea107e99c7c6db59fed36023729615f92f5d665b))
+
 ## [3.0.1](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.0...v3.0.1) (2026-05-08)
 
 
