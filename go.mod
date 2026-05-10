@@ -1,6 +1,6 @@
 module github.com/air-hand/gh-ratelimit-metrics-exporter
 
-go 1.26.3
+go 1.26.2
 
 require (
 	github.com/cockroachdb/errors v1.13.0
