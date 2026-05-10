@@ -30,6 +30,13 @@
       automerge: true,
     },
     {
+      description: 'Update mise Go and go.mod Go versions together',
+      matchManagers: ['mise', 'gomod'],
+      matchDepNames: ['go'],
+      groupName: 'Go',
+      rangeStrategy: 'bump',
+    },
+    {
       "matchManagers": ["gomod"],
       "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
     },
