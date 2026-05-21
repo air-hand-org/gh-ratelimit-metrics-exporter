@@ -1,6 +1,7 @@
 services:
   exporter:
     image: ghcr.io/${GITHUB_REPOSITORY_OWNER:-air-hand-org}/gh-ratelimit-metrics-exporter:latest-amd64
+    pull_policy: never
     environment:
       GH_TOKEN: ${GH_TOKEN:-}
       GH_APP_CLIENT_ID: ${GH_APP_CLIENT_ID:-}
