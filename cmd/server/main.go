@@ -25,12 +25,12 @@ func registerConstructors() *dig.Container {
 	if err := container.Provide(NewStdoutLogger); err != nil {
 		log.Fatal(err)
 	}
-	if err := container.Provide(func() []newClientFunc {
+	if err := container.Provide(func() []newClientOptsFunc {
 		return newClientFuncs
 	}); err != nil {
 		log.Fatal(err)
 	}
-	if err := container.Provide(newClientWithEnv); err != nil {
+	if err := container.Provide(newClientFromEnv); err != nil {
 		log.Fatal(err)
 	}
 	if err := container.Provide(newGitHubRateLimitsFetcher); err != nil {

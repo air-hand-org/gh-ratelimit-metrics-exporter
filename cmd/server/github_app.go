@@ -6,36 +6,43 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/google/go-github/v86/github"
+	"github.com/cockroachdb/errors"
+	"github.com/google/go-github/v87/github"
 	"github.com/jferrl/go-githubauth"
 	"github.com/rs/zerolog"
 	"golang.org/x/oauth2"
 )
 
-// newClientWithGitHubApp creates a new GitHub client with GitHub App.
-func newClientWithGitHubApp(logger *zerolog.Logger) *github.Client {
+// newClientOptsWithGitHubApp creates a new GitHub client with GitHub App.
+func newClientOptsWithGitHubApp(logger *zerolog.Logger) ([]github.ClientOptionsFunc, error) {
 	ghAppClientID := os.Getenv("GH_APP_CLIENT_ID")
 	ghInstallationID := os.Getenv("GH_INSTALLATION_ID")
 	ghPrivateKey := os.Getenv("GH_PRIVATE_KEY")
 
+	if ghAppClientID == "" && ghInstallationID == "" && ghPrivateKey == "" {
+		logger.Debug().Msg("GitHub App envs are not set. Skip auth as app.")
+		return nil, nil
+	}
+
 	if ghAppClientID == "" || ghInstallationID == "" || ghPrivateKey == "" {
-		logger.Debug().Msg("Neither GH_APP_CLIENT_ID nor GH_INSTALLATION_ID nor GH_PRIVATE_KEY is set. Skip generating a new GitHub client with GitHub App.")
-		return nil
+		return nil, errors.New("GitHub App auth is partially configured")
 	}
 
 	ghInstallationIDInt64, err := strconv.ParseInt(ghInstallationID, 10, 64)
 	if err != nil {
 		logger.Error().Msg("Failed to parse GH_INSTALLATION_ID as integer.")
-		return nil
+		return nil, err
 	}
 
 	client, err := newGitHubAppHTTPClient(ghAppClientID, ghInstallationIDInt64, []byte(ghPrivateKey))
 	if err != nil {
 		logger.Error().Msg("Failed to new HTTP client with GitHub App.")
-		return nil
+		return nil, err
 	}
 	logger.Info().Msg("Generate a new GitHub client with GitHub App.")
-	return github.NewClient(client)
+	return []github.ClientOptionsFunc{
+		github.WithHTTPClient(client),
+	}, nil
 }
 
 func newGitHubAppHTTPClient(appClientID string, installationID int64, privateKey []byte) (*http.Client, error) {

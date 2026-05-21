@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewClientWithToken(t *testing.T) {
+func TestNewClientOptsWithToken(t *testing.T) {
 	tests := []struct {
 		testName       string
 		ghTokenEnv     string
@@ -46,10 +46,12 @@ func TestNewClientWithToken(t *testing.T) {
 			t.Setenv("GH_TOKEN", tt.ghTokenEnv)
 			t.Setenv("GITHUB_TOKEN", tt.githubTokenEnv)
 
+			opts, _ := newClientOptsWithToken(logger)
+
 			if tt.expectNil {
-				assert.Nil(t, newClientWithToken(logger))
+				assert.Nil(t, opts)
 			} else {
-				assert.NotNil(t, newClientWithToken(logger))
+				assert.NotNil(t, opts)
 			}
 		})
 	}
