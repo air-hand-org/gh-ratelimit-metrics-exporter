@@ -8,31 +8,31 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewClientWithEnv_Nil(t *testing.T) {
+func TestNewClientFromEnv_Nil(t *testing.T) {
 	tests := []struct {
 		testName string
-		funcs    []newClientFunc
+		funcs    []newClientOptsFunc
 	}{
 		{
 			testName: "empty funcs",
-			funcs:    []newClientFunc{},
+			funcs:    []newClientOptsFunc{},
 		},
 		{
 			testName: "a func returns nil",
-			funcs: []newClientFunc{
-				func(*zerolog.Logger) *github.Client {
-					return nil
+			funcs: []newClientOptsFunc{
+				func(*zerolog.Logger) ([]github.ClientOptionsFunc, error) {
+					return nil, nil
 				},
 			},
 		},
 		{
 			testName: "all funcs return nil",
-			funcs: []newClientFunc{
-				func(*zerolog.Logger) *github.Client {
-					return nil
+			funcs: []newClientOptsFunc{
+				func(*zerolog.Logger) ([]github.ClientOptionsFunc, error) {
+					return nil, nil
 				},
-				func(*zerolog.Logger) *github.Client {
-					return nil
+				func(*zerolog.Logger) ([]github.ClientOptionsFunc, error) {
+					return nil, nil
 				},
 			},
 		},
@@ -42,7 +42,7 @@ func TestNewClientWithEnv_Nil(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.testName, func(t *testing.T) {
-			c, err := newClientWithEnv(tt.funcs, logger)
+			c, err := newClientFromEnv(tt.funcs, logger)
 			assert.Nilf(t, c, "test_name: %s", tt.testName)
 			assert.Error(t, err)
 		})

@@ -2,24 +2,30 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
+	"time"
 
+	"github.com/cockroachdb/errors"
 	"github.com/google/go-github/v87/github"
 	"github.com/rs/zerolog"
 )
 
-type newClientFunc func(*zerolog.Logger) *github.Client
+type newClientOptsFunc func(*zerolog.Logger) ([]github.ClientOptionsFunc, error)
 
-var newClientFuncs = []newClientFunc{
-	newClientWithGitHubApp,
-	newClientWithToken,
+var newClientFuncs = []newClientOptsFunc{
+	newClientOptsWithGitHubApp,
+	newClientOptsWithToken,
 }
 
-func newClientWithEnv(funcs []newClientFunc, logger *zerolog.Logger) (*github.Client, error) {
+func newClientFromEnv(funcs []newClientOptsFunc, logger *zerolog.Logger) (*github.Client, error) {
 	for _, f := range funcs {
-		if gh := f(logger); gh != nil {
-			return gh, nil
+		opts, err := f(logger)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to newClientFromEnv")
+		}
+		if len(opts) > 0 {
+			opts = append(opts, github.WithTimeout(15*time.Second))
+			return github.NewClient(opts...)
 		}
 	}
 	return nil, errors.New("no GitHub authentication is configured")

@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestNewClientWithGitHubApp(t *testing.T) {
+func TestNewClientOptsWithGitHubApp(t *testing.T) {
 	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
 		t.Fatal("Failed to generate rsa private key.")
@@ -30,6 +30,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 		installationID string
 		privateKey     string
 		expectNil      bool
+		expectErr		bool
 	}{
 		{
 			testName:       "No env at all",
@@ -37,6 +38,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			installationID: "",
 			privateKey:     "",
 			expectNil:      true,
+			expectErr: 		false,
 		},
 		{
 			testName:       "Lack of client_id",
@@ -44,6 +46,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			installationID: "1008",
 			privateKey:     pemDataString,
 			expectNil:      true,
+			expectErr: 		true,
 		},
 		{
 			testName:       "Lack of installation_id",
@@ -51,6 +54,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			installationID: "",
 			privateKey:     pemDataString,
 			expectNil:      true,
+			expectErr: 		true,
 		},
 		{
 			testName:       "Not integer installation_id",
@@ -58,6 +62,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			installationID: "def",
 			privateKey:     pemDataString,
 			expectNil:      true,
+			expectErr: 		true,
 		},
 		{
 			testName:       "Lack of private_key",
@@ -65,6 +70,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			installationID: "1008",
 			privateKey:     "",
 			expectNil:      true,
+			expectErr: 		true,
 		},
 		{
 			testName:       "Broken private key",
@@ -72,6 +78,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			installationID: "1008",
 			privateKey:     "foobarbaz",
 			expectNil:      true,
+			expectErr: 		true,
 		},
 		{
 			testName:       "Ok",
@@ -79,6 +86,7 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			installationID: "1008",
 			privateKey:     pemDataString,
 			expectNil:      false,
+			expectErr: 		false,
 		},
 	}
 
@@ -90,10 +98,16 @@ func TestNewClientWithGitHubApp(t *testing.T) {
 			t.Setenv("GH_INSTALLATION_ID", tt.installationID)
 			t.Setenv("GH_PRIVATE_KEY", tt.privateKey)
 
+			opts, err := newClientOptsWithGitHubApp(logger)
 			if tt.expectNil {
-				assert.Nil(t, newClientWithGitHubApp(logger))
+				assert.Nil(t, opts)
 			} else {
-				assert.NotNil(t, newClientWithGitHubApp(logger))
+				assert.NotNil(t, opts)
+			}
+			if tt.expectErr {
+				assert.Error(t, err)
+			} else {
+				assert.NoError(t, err)
 			}
 		})
 	}

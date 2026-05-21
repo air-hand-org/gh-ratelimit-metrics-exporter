@@ -16,7 +16,7 @@ codeql-build:
 
 .PHONY: fmt
 fmt:
-	go fmt ./...
+	golangci-lint fmt ./...
 
 .PHONY: run
 run:
