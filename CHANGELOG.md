@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.8](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.7...v3.0.8) (2026-06-05)
+
+
+### Bug Fixes
+
+* **deps:** update go to v1.26.4 ([#104](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/104)) ([5d55149](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/5d5514956856fb104b58266e0f2d1d257ede856e))
+* **deps:** update go to v1.26.4 ([#106](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/106)) ([9ed5263](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/9ed5263612736ec99ea16b33d7be429514133a60))
+
 ## [3.0.7](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.6...v3.0.7) (2026-05-25)
 
 
