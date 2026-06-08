@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.9](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.8...v3.0.9) (2026-06-08)
+
+
+### Bug Fixes
+
+* update debug launch configs ([#113](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/113)) ([348ccb3](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/348ccb30caded32eb80a276cd051d9d832ac61c4))
+
 ## [3.0.8](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.7...v3.0.8) (2026-06-05)
 
 
