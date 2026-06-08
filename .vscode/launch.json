@@ -6,7 +6,10 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/app"
+            "program": "${workspaceFolder}/cmd/server",
+            "env": {
+                "GITHUB_TOKEN": "dummy"
+            }
         }
     ]
 }

@@ -1,0 +1,15 @@
+[
+  {
+    "label": "Run server",
+    "adapter": "Delve",
+    "request": "launch",
+    "mode": "debug",
+    "program": "./cmd/server",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "env": {
+      "GITHUB_TOKEN": "dummy"
+    },
+    "args": [],
+    "buildFlags": []
+  }
+]
