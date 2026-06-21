@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.11](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.10...v3.0.11) (2026-06-21)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/cockroachdb/errors to v1.14.0 ([#129](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/129)) ([9093b76](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/9093b76e0876b7138c1daeff095ca603e6b1a80f))
+
 ## [3.0.10](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.9...v3.0.10) (2026-06-09)
 
 
