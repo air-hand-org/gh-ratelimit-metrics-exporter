@@ -35,6 +35,7 @@ jobs:
         with:
           client-id: ${{ inputs.gh-app-client-id }}
           private-key: ${{ secrets.gh-app-private-key }}
+          permission-contents: read
       - name: e2e-test-github-app
         run: make e2e-test
         env:
