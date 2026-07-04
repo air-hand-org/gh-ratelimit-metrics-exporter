@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.12](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.11...v3.0.12) (2026-07-03)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/jferrl/go-githubauth to v1.7.0 ([#140](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/140)) ([7b67d52](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/7b67d52aba749d3d4bb4b1a1b93536b8cbd089fa))
+
 ## [3.0.11](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.10...v3.0.11) (2026-06-21)
 
 
