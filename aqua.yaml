@@ -13,5 +13,5 @@ packages:
   - name: golangci/golangci-lint@v2.12.2
   - name: matryer/moq@v0.7.1
   - name: goreleaser/goreleaser@v2.16.0
-  - name: prometheus/prometheus@v3.12.0
+  - name: prometheus/prometheus@v3.13.0
   - name: eficode/wait-for@v2.2.4
