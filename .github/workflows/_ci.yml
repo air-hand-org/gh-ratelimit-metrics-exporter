@@ -34,8 +34,9 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
+          # for super-linter
           fetch-depth: 0
           persist-credentials: false
       - name: load env
@@ -48,11 +49,6 @@ jobs:
           private-key: ${{ secrets.gh-app-private-key }}
           permission-issues: write
           permission-pull-requests: write
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
-        with:
-          # for super-linter
-          fetch-depth: 0
-          persist-credentials: false
       - uses: super-linter/super-linter/slim@4ce20838b8ab83717e78138c5b3a1407148e0918 # v8.7.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
