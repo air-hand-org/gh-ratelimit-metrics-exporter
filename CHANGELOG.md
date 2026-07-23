@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.14](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.13...v3.0.14) (2026-07-23)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/prometheus/client_golang to v1.24.0 ([#174](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/174)) ([d305a19](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/d305a19cfcb9c37de78a1a371690983389a67816))
+
 ## [3.0.13](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.12...v3.0.13) (2026-07-11)
 
 
