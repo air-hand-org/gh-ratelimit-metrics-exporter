@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.18](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.17...v3.0.18) (2026-08-22)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/stretchr/testify to v1.12.1 ([#219](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/219)) ([45fdf1d](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/45fdf1dd33cb716584ec7922504505ee5693f270))
+
 ## [3.0.17](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.16...v3.0.17) (2026-08-18)
 
 
