@@ -4,7 +4,7 @@ import (
 	"cmp"
 	"os"
 
-	"github.com/google/go-github/v91/github"
+	"github.com/google/go-github/v92/github"
 	"github.com/rs/zerolog"
 )
 
