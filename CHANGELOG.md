@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.18](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.17...v3.0.18) (2026-09-23)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/google/go-github/v90 to v91 ([#234](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/234)) ([1b5d91e](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/1b5d91e6a07cc18d507d0254bdac0c6cce3987ee))
+* **deps:** update module github.com/google/go-github/v91 to v92 ([#243](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/243)) ([8450b78](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/8450b78e4f5bb3592c53a9852b348ac9922a4299))
+* **deps:** update module github.com/jferrl/go-githubauth to v1.8.0 ([#252](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/252)) ([88d7f51](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/88d7f51aa0036c009b0b8d5aa060708240d393d6))
+* **deps:** update module github.com/jferrl/go-githubauth to v1.9.1 ([#253](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/253)) ([85b6130](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/85b6130ff1d57aafe929632c04cfca4218876084))
+* **deps:** update module github.com/stretchr/testify to v1.12.1 ([#219](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/219)) ([45fdf1d](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/45fdf1dd33cb716584ec7922504505ee5693f270))
+* **deps:** update module golang.org/x/oauth2 to v0.37.0 ([#235](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/235)) ([6ed6280](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/6ed6280c211aa45e9027a91a48931e47c8724970))
+* **deps:** update module golang.org/x/sync to v0.23.0 ([#236](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/236)) ([3a678bf](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/3a678bf09e8353d934148b7a3ba3681a3af28967))
+
 ## [3.0.17](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.16...v3.0.17) (2026-08-18)
 
 
