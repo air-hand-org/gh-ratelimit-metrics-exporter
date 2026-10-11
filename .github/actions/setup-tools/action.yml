@@ -11,7 +11,7 @@ runs:
     - if: ${{ inputs.aqua == 'true' }}
       uses: aquaproj/aqua-installer@82d0e83878a8657c4a6f2ff1755d3bfbfc67f329 # v4.1.0
       with:
-        aqua_version: v2.63.0
+        aqua_version: v2.64.0
         aqua_opts: ""
     - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
       with:
