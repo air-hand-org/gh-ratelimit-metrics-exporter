@@ -12,14 +12,14 @@ permissions: {}
 
 jobs:
   codeql:
-    uses: ./.github/workflows/_codeql.yml
+    uses: $/.github/workflows/_codeql.yml
     permissions:
       actions: read
       contents: read
       security-events: write
 
   test:
-    uses: ./.github/workflows/_test.yml
+    uses: $/.github/workflows/_test.yml
     with:
       gh-app-client-id: ${{ inputs.gh-app-client-id }}
     secrets:
@@ -49,7 +49,7 @@ jobs:
           private-key: ${{ secrets.gh-app-private-key }}
           permission-issues: write
           permission-pull-requests: write
-      - uses: super-linter/super-linter/slim@4ce20838b8ab83717e78138c5b3a1407148e0918 # v8.7.0
+      - uses: super-linter/super-linter/slim@2da136927bd4a73596db63044b504547c62cb854 # v9.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ENABLE_GITHUB_PULL_REQUEST_SUMMARY_COMMENT: false
