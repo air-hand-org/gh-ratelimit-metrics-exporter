@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: ./.github/workflows/_ci.yml
+    uses: $/.github/workflows/_ci.yml
     with:
       gh-app-client-id: ${{ vars.GH_APP_RELEASE_CLIENT_ID }}
     secrets:

@@ -12,14 +12,14 @@ permissions: {}
 
 jobs:
   codeql:
-    uses: ./.github/workflows/_codeql.yml
+    uses: $/.github/workflows/_codeql.yml
     permissions:
       actions: read
       contents: read
       security-events: write
 
   test:
-    uses: ./.github/workflows/_test.yml
+    uses: $/.github/workflows/_test.yml
     with:
       gh-app-client-id: ${{ inputs.gh-app-client-id }}
     secrets:
