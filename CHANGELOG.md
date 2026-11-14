@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.23](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.22...v3.0.23) (2026-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency go to v1.27.4 ([#328](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/328)) ([a9fdea6](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/a9fdea67ec981397544e8354455dd6c850dcbd0f))
+* **deps:** update go module directive to v1.27.4 ([#327](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/327)) ([43a6540](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/43a65403503413a781ac132713cc765ac684a6be))
+* **deps:** update module github.com/jferrl/go-githubauth to v1.11.0 ([#306](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/306)) ([f34aefa](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/f34aefa46693f27ea5573d127f94467407c681e2))
+* **deps:** update module github.com/jferrl/go-githubauth to v1.12.0 ([#314](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/314)) ([c1f9a88](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/c1f9a88bcc5fce15777763f505ab14d5718dd163))
+* **deps:** update module golang.org/x/oauth2 to v0.38.0 ([#324](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/324)) ([e4c010e](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/e4c010e6742a1dd9d2ac72f5482ca937579fdb75))
+* **deps:** update module golang.org/x/sync to v0.25.0 ([#325](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/issues/325)) ([f64096b](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/commit/f64096b21ca9eba952c2875bad90c11df9f359ed))
+
 ## [3.0.22](https://github.com/air-hand-org/gh-ratelimit-metrics-exporter/compare/v3.0.21...v3.0.22) (2026-10-27)
 
 
